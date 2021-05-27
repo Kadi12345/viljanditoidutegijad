@@ -1,0 +1,116 @@
+openapi: 3.0.1
+info:
+  title: Viljandi toidutegijad
+  description: This is a API for showing Viljandi foodmakers daily offers
+  contact:
+    email: kadikobin@gmail.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.0
+servers:
+# Added by API Auto Mocking Plugin
+- description: SwaggerHub API Auto Mocking
+  url: https://virtserver.swaggerhub.com/Kadi12345/viljandi-toidutegijad/1.0.0
+- url: https://localhost:3000/
+tags:
+- name: users
+  description: Can add, change and delete offers
+paths:
+  /offers:
+    get:
+      tags:
+      - users
+      summary: searches all offers
+      description: |
+        By passing in the appropriate options, you can search for
+        available daily offers in the system
+      operationId: searchAllOffers
+      parameters:
+      - name: searchString
+        in: query
+        description: pass an optional search string for looking up all offers
+        schema:
+          type: string
+      - name: skip
+        in: query
+        description: number of records to skip for pagination
+        schema:
+          minimum: 0
+          type: integer
+          format: int32
+      - name: limit
+        in: query
+        description: maximum number of records to return
+        schema:
+          maximum: 500
+          minimum: 0
+          type: integer
+          format: int32
+      responses:
+        200:
+          description: search results matching criteria
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/offer'
+        400:
+          description: bad input parameter
+          content: {}
+  /offer:
+    post:
+      tags:
+      - users
+      summary: adds an offer
+      description: Adds an offer to the system
+      operationId: addOffer
+      requestBody:
+        description: offer to add
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/offer'
+        required: false
+      responses:
+        201:
+          description: offer created
+          content: {}
+        400:
+          description: invalid input, object invalid
+          content: {}
+        409:
+          description: an existing offer already exists
+          content: {}
+      x-codegen-request-body-name: offer
+components:
+  schemas:
+    offer:
+      required:
+      - id
+      - offerDate
+      - product
+      - imageUrl
+      - supplier
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: d290f1ee-6c54-4b01-90e6-d701748f0851
+        product:
+          type: string
+          example: Lihapirukas
+        imageUrl:
+          type: string
+          example: https://www.saiasahwer.ee/wp-content/uploads/2020/08/lihapirukad-006.jpg
+        offerDate:
+          type: string
+          format: date
+        supplier:
+          type: string
+          example: Mulgi pagar
+        contact:
+          type: string
+          example: aadress, telefon
