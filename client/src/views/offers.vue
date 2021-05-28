@@ -3,11 +3,15 @@
     <div class="row">
       <div class="col-lg-6 offset-lg-3 col-sm-10 offset-sm-1">
         <center>
-          <b-table striped hover :items="items" :fields="fields">
-            <template #cell(product)="data">
-              <b class="text-info">{{ data.item.value }} </b>
-            </template>
-          </b-table>
+          <b-card
+            img-src= {{ offers.data.imageUrl }}
+            img-alt="Card image"
+            img-right
+          >
+            <b-card-text>
+          {{ offers.data.product }}
+            </b-card-text>
+          </b-card>
         </center>
       </div>
     </div>
@@ -19,16 +23,12 @@ export default {
   name: "offers",
   data() {
     return {
-      fields: [
-        { key: "offerDate", label: "Pakkumise kuupäev:", sortable: true },
-        { key: "product", label: "Toode:", sortable: true },
-        { key: "imageUrl", label: "Pilt:", sortable: true },
-        { key: "supplier", label: "Pakkuja:", sortable: true },
-        { key: "contact", label: "Kontakt:", sortable: true },
-        { key: "id", label: "" },
-        { key: "delete", label: "" },
+      offers: [
+        {product: [] },
+        {imageUrl: [] }
+
+
       ],
-      items: [],
     };
   },
 
