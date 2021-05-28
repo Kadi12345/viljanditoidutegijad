@@ -3,15 +3,18 @@
     <div class="row">
       <div class="col-lg-6 offset-lg-3 col-sm-10 offset-sm-1">
         <center>
-          <b-card
-            img-src= {{ offers.data.imageUrl }}
-            img-alt="Card image"
-            img-right
-          >
-            <b-card-text>
-          {{ offers.data.product }}
-            </b-card-text>
-          </b-card>
+            <div v-for="offer in offers" :key="offer.product" class="col-md-3 col-6 my-1" >
+            <div class="card h-100">
+                <img :src="offer.imageUrl" class="card-img-top">
+                <div class="card-body">
+                    <div class="card-title">{{ offer.product }}</div>
+                    <div>
+                        <span class="badge badge-pill badge-info">${{ offer.offerDate }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
         </center>
       </div>
     </div>
@@ -24,10 +27,12 @@ export default {
   data() {
     return {
       offers: [
-        {product: [] },
-        {imageUrl: [] }
-
-
+        {
+        product: "", 
+        imageUrl: "",
+        offerDate: ""
+        },
+       
       ],
     };
   },
@@ -42,7 +47,7 @@ export default {
         method: "GET",
       });
       console.log("offers", offers);
-      this.items = offers.data;
+      this.offers = offers.data;
     },
   },
   /*methods: {
