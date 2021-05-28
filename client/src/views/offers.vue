@@ -3,13 +3,11 @@
     <div class="row">
       <div class="col-lg-6 offset-lg-3 col-sm-10 offset-sm-1">
         <center>
-          <form id="create-post-form">
-            <b-table striped hover :items="items" :fields="fields">
-              <template #cell(product)="data">
-                <b class="text-info">{{ data.item.value }} </b>
-              </template>
-            </b-table>
-          </form>
+          <b-table striped hover :items="items" :fields="fields">
+            <template #cell(product)="data">
+              <b class="text-info">{{ data.item.value }} </b>
+            </template>
+          </b-table>
         </center>
       </div>
     </div>
@@ -33,14 +31,19 @@ export default {
       items: [],
     };
   },
+
   async created() {
-    const offers = await axios({
-      url: "api/offers",
-      method: "GET",
-      headers: {},
-    });
-    console.log("offers", offers);
-    this.items = offers.data.allOffers;
+    await this.getOffers();
+  },
+  methods: {
+    async getOffers() {
+      const offers = await axios({
+        url: "api/offers",
+        method: "GET",
+      });
+      console.log("offers", offers);
+      this.items = offers.data;
+    },
   },
   /*methods: {
     deleteOffer(id, index) {
