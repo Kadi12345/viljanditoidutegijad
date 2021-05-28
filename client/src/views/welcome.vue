@@ -3,19 +3,36 @@
     <div class="row">
       <div class="col-lg-6 offset-lg-3 col-sm-10 offset-sm-1">
         <center>
-<b-row>
-  <b-col lg="6" class="pb-2"><b-button class="btn btn-success" size="lg">LISA PAKKUMINE</b-button></b-col>
-  <b-col lg="6" class="pb-2"><b-button class="btn btn-success" size="lg">VAATA PAKKUMISI</b-button></b-col>
-</b-row>
-</center>
+          <b-row>
+            <b-col lg="6" class="pb-2"
+              ><b-button class="btn btn-success" size="lg" @click="addOffer()"
+                >LISA PAKKUMINE</b-button
+              ></b-col
+            >
+            <b-col lg="6" class="pb-2"
+              ><b-button class="btn btn-success" size="lg" @click="showOffers()"
+                >VAATA PAKKUMISI</b-button
+              ></b-col
+            >
+          </b-row>
+        </center>
       </div>
     </div>
   </div>
 </template>
+<script>
+export default {
+  data() {
+    return {};
+  },
 
-
-  <center>
-            <button class="btn btn-success btn-block w-75 my-4" type="submit">
-              Logi sisse
-            </button>
-          </center>
+  methods: {
+    addOffer() {
+      this.$router.push("addOffer");
+    },
+    showOffers() {
+      this.$router.push("offers");
+    },
+  },
+};
+</script>
