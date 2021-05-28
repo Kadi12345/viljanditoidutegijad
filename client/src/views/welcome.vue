@@ -1,6 +1,6 @@
 <template>
-  <div class="container mb-5">
-    <div class="row">
+  <div class="container mb-5 mt-1">
+    <b-row align-v="start">
       <div class="col-lg-6 offset-lg-3 col-sm-10 offset-sm-1">
         <center>
           <b-row>
@@ -17,7 +17,7 @@
           </b-row>
         </center>
       </div>
-    </div>
+    </b-row>
   </div>
 </template>
 <script>
