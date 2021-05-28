@@ -8,5 +8,5 @@ mongoose.Promise = global.Promise;
 
 module.exports = {
   offers: require("./models/offer.model"),
-  suppliers: require("./models/suppliers.model"),
+  suppliers: require("./models/supplier.model"),
 };

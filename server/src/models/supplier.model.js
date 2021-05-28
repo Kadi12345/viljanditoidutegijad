@@ -24,30 +24,30 @@ supplierSchema.pre("save", async function(next) {
   supplierSchema.methods.generateAuthToken = async function() {
     const supplier = this;
     const token = jwt.sign(
-      { _id: supplier._id, supplier: supplier, email: supplier.email },
+      { _id: supplier._id, supplier: supplier.name, email: supplier.email },
       "secret"
     );
-    user.tokens = user.tokens.concat({ token });
-    await user.save();
+    supplier.tokens = supplier.tokens.concat({ token });
+    await supplier.save();
     return token;
   };
   
   
-  userSchema.statics.findByCredentials = async (email, password) => {
-    const user = await User.findOne({ email });
-    console.log(user);
-    if (!user) {
+  supplierSchema.statics.findByCredentials = async (email, password) => {
+    const supplier = await suppliers.findOne({ email });
+    console.log(supplier);
+    if (!supplier) {
       throw new Error({ error: "Nõuetele mittevastavad sisselogimise detailid" });
     }
-    const isPasswordMatch = await bcryptjs.compare(password, user.password);
+    const isPasswordMatch = await bcryptjs.compare(password, supplier.password);
     if (!isPasswordMatch) {
       throw new Error({ error: "Nõuetele mittevastavad sisselogimise detailid" });
     }
-    return user;
+    return supplier;
   };
   
-  const User = mongoose.model("User", userSchema);
+  const suppliers = mongoose.model("suppliers", supplierSchema);
 
-schema.set("toJSON", { virtuals: true });
+supplierSchema.set("toJSON", { virtuals: true });
 
-module.exports = mongoose.model("suppliers", schema);
+module.exports = suppliers;
