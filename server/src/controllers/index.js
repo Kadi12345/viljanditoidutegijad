@@ -4,4 +4,5 @@ module.exports = {
   deleteOffer: require("./deleteOffer.controller"),
   loginSupplier: require("./loginSupplier.controller"),
   registerSupplier: require("./registerSupplier.controller"),
+  getSupplierDetails: require("./getSupplierDetails.controller"),
 };

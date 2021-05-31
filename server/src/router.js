@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { addOffer, getAllOffers, deleteOffer, loginSupplier, registerSupplier } = require("./controllers");
+const { addOffer, getAllOffers, deleteOffer, loginSupplier, registerSupplier, getSupplierDetails } = require("./controllers");
 
 const auth = require(`./auth`);
 
@@ -9,5 +9,6 @@ router.get("/offers", getAllOffers);
 router.delete("/offers/:id", deleteOffer);
 router.post("/login", loginSupplier);
 router.post("/register", registerSupplier);
+router.get(`/me`, auth, getSupplierDetails);
 
 module.exports = router;
