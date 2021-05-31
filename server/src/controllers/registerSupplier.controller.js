@@ -1,23 +1,21 @@
 const db = require('./../db')
-const suppliers = db.suppliers
+const supplier = require(`../models/supplier.model`)
 
 module.exports = async (req, res) => {
   try {
-    let isSupplier = await suppliers.find({ email: req.body.email });
-    console.log(isSupplier);
+    let isSupplier = await supplier.find({ email: req.body.email });
     if (isSupplier.length >= 1) {
       return res.status(409).json({
-        message: "email on juba kasutusel"
+        message: "See email on juba kasutusel"
       });
     }
-    const supplier = new suppliers({
+    isSupplier = new supplier({
       name: req.body.name,
-      contact: req.body.contact,
       email: req.body.email,
       password: req.body.password
     });
-    let data = await supplier.save();
-    const token = await supplier.generateAuthToken(); 
+    let data = await isSupplier.save();
+    const token = await isSupplier.generateAuthToken(); 
     res.status(201).json({ data, token });
   } catch (err) {
     res.status(400).json({ err: err });

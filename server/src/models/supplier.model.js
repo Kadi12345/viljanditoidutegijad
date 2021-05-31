@@ -5,7 +5,6 @@ const Schema = mongoose.Schema;
 
 const supplierSchema = new Schema({
   name: { type: String, required: true },
-  contact: { type: String, required: true },
   email: { type: String, required: [true]},
   password: { type: String, required: [true]},
   tokens: [{token: {type: String, required: true}}]

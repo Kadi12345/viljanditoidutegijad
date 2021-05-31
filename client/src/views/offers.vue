@@ -4,7 +4,7 @@
   <center>
       <b-row>
             <b-col lg="12" class="pb-2"
-              ><b-button class="btn btn-success" size="lg" @click="logIn()"
+              ><b-button class="btn btn-success" size="lg" @click="logIn"
                 >LISA PAKKUMINE</b-button
               ></b-col
             >
@@ -27,6 +27,7 @@
                   img-width="100%"
                   align="center"
                   class="h-200"
+                  @offer-deleted="getOffers"
                 >
                   <b-card-text>
                     {{ offer.supplier }}
@@ -34,7 +35,7 @@
                   </b-card-text>
                   <span class="badge badge-pill badge-success "> Pakkumine kehtib: <br>{{ offer.offerDate }}</span>
                     <center>
-            <button class="badge badge-pill badge-danger" size="lg" @click="deleteOffer">
+            <button class="badge badge-pill badge-danger" size="lg" type="submit" @click="deleteOffer">
               Kustuta
             </button>
           </center>
@@ -83,9 +84,8 @@ export default {
   moment,
     async deleteOffer() {
       await axios({
-        url: `/api/deleteTask`,
-        method: "DELETE",
-        data: this.offer,
+        url: `/api/offers/${this.offer.id}`,
+        method: "DELETE"
       });
       this.$emit("offer-deleted");
     }

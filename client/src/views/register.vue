@@ -16,14 +16,6 @@
             required
           />
           <input
-            type="text"
-            id="contact"
-            class="form-control mb-5"
-            placeholder="Contact"
-            v-model="register.contact"
-            required
-          />
-          <input
             type="email"
             id="email"
             class="form-control mb-5"
@@ -64,7 +56,6 @@ export default {
     return {
       register: {
         name: "",
-        contact: "",
         email: "",
         password: "",
       },
@@ -73,15 +64,15 @@ export default {
  methods: {
     async registerSupplier() {
       try {
-        let response = await this.$http.post("/api/registerSupplier", this.registerSupplier);
+        let response = await this.$http.post("/api/register", this.register);
         console.log(response);
         let token = response.data.token;
         if (token) {
           localStorage.setItem("jwt", token);
           this.$router.push("/offers");
-          swal("Success", "Registration Was successful", "success");
+          swal("Tere tulemast meie sekka!");
         } else {
-          swal("Error", "Something Went Wrong", "Error");
+          swal("Uhh, midagi läks valesti!");
         }
       } catch (err) {
         let error = err.response;
