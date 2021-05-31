@@ -1,28 +1,52 @@
 <template>
-  <div class="container mb-5">
-    <div class="row">
-      <div class="col-lg-6 offset-lg-3 col-sm-10 offset-sm-1">
-        <center>
-        <div v-for="offer in offers" :key="offer.product" class="col-md-8 col-8 my-4" >
-            <div class="card h-200">
-                <img :src="offer.imageUrl" class="card-img-top">
-                <div class="card-body">
-                    <div class="card-title">{{ offer.product }}</div>
-                    <div class="card-title">{{ offer.supplier }}</div>
-                    <div class="card-title">{{ offer.contact }}</div>
-                    <div>
-                        <span class="badge badge-pill badge-info success">{{ offer.offerDate }}</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        </center>
-      </div>
-    </div>
+<b-container fluid>
+  <div class="col-lg-6 offset-lg-3 col-sm-10 offset-sm-1">
+  <center>
+      <b-row>
+            <b-col lg="12" class="pb-2"
+              ><b-button class="btn btn-success" size="lg" @click="logIn()"
+                >LISA PAKKUMINE</b-button
+              ></b-col
+            >
+
+  
+            </b-row>
+  </center>
   </div>
+            <b-row cols="1" cols-sm="2" cols-md="3" cols-lg="4">
+              <b-col
+                v-for="offer in offers"
+                :key="offer.product"
+                col
+                no-gutters
+                class="mb-2 mt-5"
+              >
+                <b-card
+                  :title="offer.product"
+                  :img-src="offer.imageUrl"
+                  img-width="100%"
+                  align="center"
+                  class="h-200"
+                >
+                  <b-card-text>
+                    {{ offer.supplier }}
+                    {{ offer.contact }}
+                  </b-card-text>
+                  <span class="badge badge-pill badge-success "> Pakkumine kehtib: <br>{{ offer.offerDate }}</span>
+                    <center>
+            <button class="badge badge-pill badge-danger" size="lg" @click="deleteOffer">
+              Kustuta
+            </button>
+          </center>
+              
+                </b-card>
+              </b-col>
+            </b-row>
+          </b-container>
 </template>
 <script>
 import axios from "axios";
+import moment from "moment";
 export default {
   name: "offers",
   data() {
@@ -52,16 +76,18 @@ export default {
       console.log("offers", offers);
       this.offers = offers.data.allOffers;
     },
+     logIn() {
+      this.$router.push("login");
+    },
   },
-  /*
-      moment,
+  moment,
     async deleteOffer() {
       await axios({
-        url: /api/deleteTask`,
+        url: `/api/deleteTask`,
         method: "DELETE",
         data: this.offer,
       });
       this.$emit("offer-deleted");
-    },*/
+    }
 };
 </script>

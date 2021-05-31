@@ -19,6 +19,16 @@ export const routes = [
     name: "add offer",
     component: () => import("../views/addOffer.vue"),
   },
+  {
+    path: "/login",
+    name: "login",
+    component: () => import("../views/login.vue"),
+  },
+  {
+    path: "/register",
+    name: "register",
+    component: () => import("../views/register.vue"),
+  },
 ];
 
 const router = new VueRouter({
