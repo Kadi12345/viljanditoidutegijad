@@ -70,7 +70,7 @@ export default {
       },
     };
   },
-  methods: {
+ methods: {
     async registerSupplier() {
       try {
         let response = await this.$http.post("/api/registerSupplier", this.registerSupplier);

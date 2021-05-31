@@ -24,7 +24,7 @@ supplierSchema.pre("save", async function(next) {
   supplierSchema.methods.generateAuthToken = async function() {
     const supplier = this;
     const token = jwt.sign(
-      { _id: supplier._id, supplier: supplier.name, email: supplier.email },
+      { _id: supplier._id, name: supplier.name, email: supplier.email },
       "secret"
     );
     supplier.tokens = supplier.tokens.concat({ token });
@@ -45,9 +45,7 @@ supplierSchema.pre("save", async function(next) {
     }
     return supplier;
   };
-  
-  const suppliers = mongoose.model("suppliers", supplierSchema);
 
 supplierSchema.set("toJSON", { virtuals: true });
-
+const suppliers = mongoose.model("suppliers", supplierSchema);
 module.exports = suppliers;
