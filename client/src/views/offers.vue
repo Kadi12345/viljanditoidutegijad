@@ -4,7 +4,7 @@
   <center>
       <b-row>
             <b-col lg="12" class="pb-2"
-              ><b-button class="btn btn-success" size="lg" @click="logIn"
+              ><b-button class="btn btn-success" size="lg" @click="addOffer"
                 >LISA PAKKUMINE</b-button
               ></b-col
             >
@@ -30,7 +30,7 @@
                   @offer-deleted="getOffers"
                 >
                   <b-card-text>
-                    {{ offer.supplier }}
+                    {{ offer.supplier }}<br>
                     {{ offer.contact }}
                   </b-card-text>
                   <span class="badge badge-pill badge-success "> Pakkumine kehtib: <br>{{ offer.offerDate }}</span>
@@ -77,8 +77,8 @@ export default {
       console.log("offers", offers);
       this.offers = offers.data.allOffers;
     },
-     logIn() {
-      this.$router.push("login");
+     addOffer() {
+      this.$router.push("/addoffer");
     },
   },
   moment,

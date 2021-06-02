@@ -51,7 +51,7 @@ export default {
   methods: {
     async loginSupplier() {
         try {
-        let response = await this.$http.post("/api/loginSupplier", this.loginSupplier);
+        let response = await this.$http.post("/api/login", this.login);
         let token = response.data.token;
         localStorage.setItem("jwt", token);
         if (token) {
