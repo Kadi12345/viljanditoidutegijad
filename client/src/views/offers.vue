@@ -3,9 +3,19 @@
   <div class="col-lg-6 offset-lg-3 col-sm-10 offset-sm-1">
   <center>
       <b-row>
-            <b-col lg="12" class="pb-2"
+            <b-col lg="4" class="pb-2"
               ><b-button class="btn btn-success" size="lg" @click="addOffer"
                 >LISA PAKKUMINE</b-button
+              ></b-col
+            >
+            <b-col lg="4" class="pb-2"
+              ><b-button class="btn btn-success" size="lg" @click="showMyOffers"
+                >MINU PAKKUMISED</b-button
+              ></b-col
+            >
+            <b-col lg="4" class="pb-2"
+              ><b-button class="btn btn-success" size="lg" @click="addOffer"
+                >LOGI VÄLJA</b-button
               ></b-col
             >
 
@@ -77,17 +87,23 @@ export default {
       console.log("offers", offers);
       this.offers = offers.data.allOffers;
     },
+
      addOffer() {
       this.$router.push("/addoffer");
     },
+
+    showMyOffers() {
+      this.$router.push("/myoffers");
+    },
   },
   moment,
+  
     async deleteOffer() {
       await axios({
         url: `/api/offers/${this.offer.id}`,
         method: "DELETE"
       });
       this.$emit("offer-deleted");
-    }
+    },
 };
 </script>

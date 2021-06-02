@@ -29,6 +29,11 @@ export const routes = [
     name: "register",
     component: () => import("../views/register.vue"),
   },
+  {
+    path: "/myoffers",
+    name: "my offers",
+    component: () => import("../views/myOffers.vue"),
+  },
 ];
 
 const router = new VueRouter({

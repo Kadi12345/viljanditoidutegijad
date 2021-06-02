@@ -6,4 +6,5 @@ module.exports = {
   loginSupplier: require("./loginSupplier.controller"),
   registerSupplier: require("./registerSupplier.controller"),
   getSupplierDetails: require("./getSupplierDetails.controller"),
+  getOffersBySupplier: require("./getOffersBySupplier.controller")
 };
