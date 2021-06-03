@@ -1,4 +1,5 @@
-<template>
+
+<template >
 <b-container fluid>
   <div class="col-lg-6 offset-lg-3 col-sm-10 offset-sm-1">
   <center>
@@ -14,7 +15,7 @@
               ></b-col
             >
             <b-col lg="4" class="pb-2"
-              ><b-button class="btn btn-success" size="lg" @click="addOffer"
+              ><b-button class="btn btn-success" size="lg" @click="logOut"
                 >LOGI VÄLJA</b-button
               ></b-col
             >
@@ -95,6 +96,11 @@ export default {
     showMyOffers() {
       this.$router.push("/myoffers");
     },
+    logOut() {
+      localStorage.removeItem("jwt");
+      this.$router.push("/");
+    },
+    
   },
   moment,
   
