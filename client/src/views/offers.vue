@@ -58,7 +58,6 @@
 </template>
 <script>
 import axios from "axios";
-import moment from "moment";
 export default {
   name: "offers",
   data() {
@@ -100,10 +99,6 @@ export default {
       localStorage.removeItem("jwt");
       this.$router.push("/");
     },
-    
-  },
-  moment,
-  
     async deleteOffer() {
       await axios({
         url: `/api/offers/${this.offer.id}`,
@@ -111,5 +106,6 @@ export default {
       });
       this.$emit("offer-deleted");
     },
+  },
 };
 </script>

@@ -9,12 +9,12 @@
             ></b-col
           >
           <b-col lg="4" class="pb-2"
-            ><b-button class="btn btn-danger" size="lg" @click="addOffer"
+            ><b-button class="btn btn-danger" size="lg"
               >MINU PAKKUMISED</b-button
             ></b-col
           >
           <b-col lg="4" class="pb-2"
-            ><b-button class="btn btn-success" size="lg" @click="addOffer"
+            ><b-button class="btn btn-success" size="lg" @click="logOut"
               >LOGI VÄLJA</b-button
             ></b-col
           >
@@ -101,9 +101,7 @@ this.offers = myOffers.data.offersBySupplier;
     addOffer() {
       this.$router.push("/addoffer");
     },
-  },
-  
-  moment,
+    moment,
 
   async deleteOffer() {
     await axios({
@@ -112,5 +110,11 @@ this.offers = myOffers.data.offersBySupplier;
     });
     this.$emit("offer-deleted");
   },
-};
+
+  logOut() {
+      localStorage.removeItem("jwt");
+      this.$router.push("/");
+    },
+  },
+ } 
 </script>
