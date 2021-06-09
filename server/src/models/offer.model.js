@@ -7,6 +7,7 @@ const schema = new Schema({
   offerDate: { type: String, required: true },
   supplier: { type: String, required: true },
   contact: { type: String, required: true },
+  email: { type: String, required: true },
 });
 
 schema.set("toJSON", { virtuals: true });

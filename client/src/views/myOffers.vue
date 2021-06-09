@@ -83,15 +83,18 @@ export default {
     await this.getMyOffers();
   },
   methods: {
- async getMyOffers() {
-        try {
-            let token = localStorage.getItem("jwt");
-      let decoded = VueJwtDecode.decode(token);
-   console.log("TOKEN", decoded);
-   let idFromLocalStorage = decoded._id
-const myOffers = await this.$http.get(`/api/myoffers/${idFromLocalStorage}`);
-       console.log("OFFERS", myOffers);
-this.offers = myOffers.data.offersBySupplier;
+    async getMyOffers() {
+      try {
+        let token = localStorage.getItem("jwt");
+        let decoded = VueJwtDecode.decode(token);
+        console.log("TOKEN", decoded);
+        let emailFromLocalStorage = decoded.email;
+        console.log("DECODED EMAIL", emailFromLocalStorage);
+        const myOffers = await this.$http.get(
+          `/api/myoffers/${emailFromLocalStorage}`
+        );
+        console.log("OFFERS", myOffers);
+        this.offers = myOffers.data.offersBySupplier;
       } catch (err) {
         this.$swal("Uhh, midagi läks valesti!", "error");
         console.log(err.response);
@@ -103,18 +106,18 @@ this.offers = myOffers.data.offersBySupplier;
     },
     moment,
 
-  async deleteOffer() {
-    await axios({
-      url: `/api/offers/${this.offer.id}`,
-      method: "DELETE",
-    });
-    this.$emit("offer-deleted");
-  },
+    async deleteOffer() {
+      await axios({
+        url: `/api/offers/${this.offer.id}`,
+        method: "DELETE",
+      });
+      this.$emit("offer-deleted");
+    },
 
-  logOut() {
+    logOut() {
       localStorage.removeItem("jwt");
       this.$router.push("/");
     },
   },
- } 
+};
 </script>

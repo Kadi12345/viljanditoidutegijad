@@ -69,6 +69,7 @@
   </div>
 </template>
 <script>
+import VueJwtDecode from "vue-jwt-decode";
 import axios from "axios";
 export default {
   name: "add",
@@ -80,17 +81,24 @@ export default {
         offerDate: "",
         supplier: "",
         contact: "",
+        email:"",
       },
     };
   },
   methods: {
     addOffer() {
+      let token = localStorage.getItem("jwt");
+        let decoded = VueJwtDecode.decode(token);
+        console.log("TOKEN", decoded);
+        let emailFromLocalStorage = decoded.email;
+
       let newOffer = {
         product: this.offer.product,
         imageUrl: this.offer.imageUrl,
         offerDate: this.offer.offerDate,
         supplier: this.offer.supplier,
         contact: this.offer.contact,
+        email: emailFromLocalStorage,
       };
       console.log(newOffer);
       this.submitToServer(newOffer);

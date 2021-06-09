@@ -8,7 +8,7 @@ const auth = require(`./auth`);
 router.get("/offers", getAllOffers);
 router.get("/suppliers", getAllSuppliers);
 router.get(`/me/:id`, getSupplierDetails);
-router.get(`/myoffers/:id`, getOffersBySupplier);
+router.get(`/myoffers/:email`, getOffersBySupplier);
 
 router.delete("/offers/:id", deleteOffer);
 
