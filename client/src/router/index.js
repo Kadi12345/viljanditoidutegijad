@@ -12,11 +12,13 @@ export const routes = [
   {
     path: "/offers",
     name: "offers",
+    meta: { requiresAuth: true },
     component: () => import("../views/offers.vue"),
   },
   {
     path: "/addoffer",
     name: "add offer",
+    meta: { requiresAuth: true },
     component: () => import("../views/addOffer.vue"),
   },
   {
@@ -32,6 +34,7 @@ export const routes = [
   {
     path: "/myoffers",
     name: "my offers",
+    meta: { requiresAuth: true },
     component: () => import("../views/myOffers.vue"),
   },
 ];
@@ -41,5 +44,23 @@ const router = new VueRouter({
   linkActiveClass: "active",
   mode: "history",
 });
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => {
+    
+    console.log(record)
+    return record.meta.requiresAuth})) {
+    if (localStorage.getItem("jwt") == null) {
+      next({
+        path: "/login"
+      });
+    } else {
+      next();
+    }
+  } else {
+    next();
+  }
+});
+
 
 export default router;

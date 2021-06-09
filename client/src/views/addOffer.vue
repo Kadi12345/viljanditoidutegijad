@@ -28,12 +28,12 @@
             </div>
             <div class="form-group col-md-12">
               <input
-                type="text"
+                type="date"
                 id="offerDate"
                 v-model="offer.offerDate"
                 name="offerDate"
                 class="form-control"
-                placeholder="Mis kuupäevaks sa antud toodet pakud"
+                placeholder="dd"
               />
             </div>
             <div class="form-group col-md-12">
